@@ -1,0 +1,34 @@
+server:
+  port: 8081
+  shutdown: graceful
+
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/catalog-microservice}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:root}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  application:
+    name: catalog-microservice
+
+######## Actuator Configuration  #########
+management:
+  info:
+    git:
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  tracing:
+    enabled: false
+    sampling:
+      probability: 1.0
